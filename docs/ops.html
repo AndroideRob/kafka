@@ -78,7 +78,7 @@
 
   <pre class="line-numbers"><code class="language-text">      auto.leader.rebalance.enable=true</code></pre>
     You can also set this to false, but you will then need to manually restore leadership to the restored replicas by running the command:
-  <pre class="line-numbers"><code class="language-bash">  &gt; bin/kafka-preferred-replica-election.sh --bootstrap-server broker_host:port</code></pre>
+  <pre class="line-numbers"><code class="language-bash">  &gt; bin/kafka-leader-election.sh --bootstrap-server broker_host:port</code></pre>
 
   <h4 class="anchor-heading"><a id="basic_ops_racks" class="anchor-link"></a><a href="#basic_ops_racks">Balancing Replicas Across Racks</a></h4>
   The rack awareness feature spreads replicas of the same partition across different racks. This extends the guarantees Kafka provides for broker-failure to cover rack-failure, limiting the risk of data loss should all the brokers on a rack fail at once. The feature can also be applied to other broker groupings such as availability zones in EC2.
@@ -1284,11 +1284,11 @@ $ bin/kafka-acls.sh \
 
   Java 8 and Java 11 are supported. Java 11 performs significantly better if TLS is enabled, so it is highly recommended (it also includes a number of other
   performance improvements: G1GC, CRC32C, Compact Strings, Thread-Local Handshakes and more).
-  
+
   From a security perspective, we recommend the latest released patch version as older freely available versions have disclosed security vulnerabilities.
 
   Typical arguments for running Kafka with OpenJDK-based Java implementations (including Oracle JDK) are:
-  
+
   <pre class="line-numbers"><code class="language-text">  -Xmx6g -Xms6g -XX:MetaspaceSize=96m -XX:+UseG1GC
   -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:G1HeapRegionSize=16M
   -XX:MinMetaspaceFreeRatio=50 -XX:MaxMetaspaceFreeRatio=80 -XX:+ExplicitGCInvokesConcurrent</code></pre>
